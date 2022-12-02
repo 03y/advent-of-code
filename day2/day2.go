@@ -1,4 +1,4 @@
-package main
+ package main
 
 import (
 	"bufio"
@@ -7,10 +7,15 @@ import (
 	"strings"
 )
 
+var rps = map[string]string {
+    "rock":     "scissors",
+    "paper":    "rock",
+    "scissors": "paper",
+}
+
 func main() {
 	input, _ := readLines("input.txt")
-	part1_score := 0
-	part2_score := 0
+	var part1_score, part2_score = 0, 0
 
 	for _, line := range input {
 		part1_score += outcome(translate(strings.Split(line, " ")[0]), translate(strings.Split(line, " ")[1]))
@@ -31,31 +36,20 @@ func readLines(path string) ([]string, error) {
 }
 
 func translate(input string) string {
-	switch input {
-		case "X":
-			return "rock"
-		case "Y":
-			return "paper"
-		case "Z":
-			return "scissors"
-		case "A":
-			return "rock"
-		case "B":
-			return "paper"
-		case "C":
-			return "scissors"
-	}
+    if input == "X" || input == "A" {
+        return "rock"
+    }
+    if input == "Y" || input == "B" {
+        return "paper"
+    }
+    if input == "Z" || input == "C" {
+        return "scissors"
+    }
 	return ""
 }
 
 func outcome(opponent_move string, my_move string) int {
 	score := 0
-	rps := map[string]string {
-		"rock":     "scissors",
-		"paper":    "rock",
-		"scissors": "paper",
-	}
-
 	switch my_move {
 		case "rock":
 			score += 1
@@ -66,23 +60,14 @@ func outcome(opponent_move string, my_move string) int {
 	}
 
 	if rps[my_move] == opponent_move {
-		score += 6
-	} else if rps[opponent_move] == my_move {
-		score += 0
-	} else {
-		score += 3
+		score += 6 // we win
+	} else if opponent_move == my_move {
+		score += 3 // we tie
 	}
-
 	return score
 }
 
 func part2_calculation(opponent_move string, outcome string) string {
-	rps := map[string]string {
-		"rock":     "scissors",
-		"paper":    "rock",
-		"scissors": "paper",
-	}
-
 	switch outcome {
 		case "X":
 			return rps[opponent_move]
