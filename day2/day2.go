@@ -1,4 +1,4 @@
- package main
+package main
 
 import (
 	"bufio"
@@ -45,7 +45,7 @@ func translate(input string) string {
     if input == "Z" || input == "C" {
         return "scissors"
     }
-	return ""
+    return ""
 }
 
 func outcome(opponent_move string, my_move string) int {
