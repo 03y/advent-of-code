@@ -9,29 +9,29 @@ import (
 )
 
 func main() {
-	stacks := [][]string {
-		{"H", "C", "R"},
-		{"B", "J", "H", "L", "S", "F"},
-		{"R", "M", "D", "H", "J", "T", "Q"},
-		{"S", "G", "R", "H", "Z", "B", "J"},
-		{"R", "P", "F", "Z", "T", "D", "C", "B"},
-		{"T", "H", "C", "G"},
-		{"S", "N", "V", "Z", "B", "P", "W", "L"},
-		{"R", "J", "Q", "G", "C"},
-		{"L", "D", "T", "R", "H", "P", "F", "S"},
-	}
+	// stacks := [][]string {
+	// 	{"H", "C", "R"},
+	// 	{"B", "J", "H", "L", "S", "F"},
+	// 	{"R", "M", "D", "H", "J", "T", "Q"},
+	// 	{"S", "G", "R", "H", "Z", "B", "J"},
+	// 	{"R", "P", "F", "Z", "T", "D", "C", "B"},
+	// 	{"T", "H", "C", "G"},
+	// 	{"S", "N", "V", "Z", "B", "P", "W", "L"},
+	// 	{"R", "J", "Q", "G", "C"},
+	// 	{"L", "D", "T", "R", "H", "P", "F", "S"},
+	// }
 
-	stacks2 := [][]string {
-		{"H", "C", "R"},
-		{"B", "J", "H", "L", "S", "F"},
-		{"R", "M", "D", "H", "J", "T", "Q"},
-		{"S", "G", "R", "H", "Z", "B", "J"},
-		{"R", "P", "F", "Z", "T", "D", "C", "B"},
-		{"T", "H", "C", "G"},
-		{"S", "N", "V", "Z", "B", "P", "W", "L"},
-		{"R", "J", "Q", "G", "C"},
-		{"L", "D", "T", "R", "H", "P", "F", "S"},
-	}
+	// stacks2 := [][]string {
+	// 	{"H", "C", "R"},
+	// 	{"B", "J", "H", "L", "S", "F"},
+	// 	{"R", "M", "D", "H", "J", "T", "Q"},
+	// 	{"S", "G", "R", "H", "Z", "B", "J"},
+	// 	{"R", "P", "F", "Z", "T", "D", "C", "B"},
+	// 	{"T", "H", "C", "G"},
+	// 	{"S", "N", "V", "Z", "B", "P", "W", "L"},
+	// 	{"R", "J", "Q", "G", "C"},
+	// 	{"L", "D", "T", "R", "H", "P", "F", "S"},
+	// }
 
 	// stacks := [][]string{
 	// 	{"Z", "N"},
@@ -47,7 +47,7 @@ func main() {
 
 	// queue := []string{}
 
-	input, _ := readLines("test_data.txt")
+	input, _ := readLines("input.txt")
 	var sectionMarker, stackCount = 0, 0
 	for i := range input {
 		if input[i] == "" {
@@ -67,7 +67,7 @@ func main() {
 	for i := 0; i < sectionMarker - 1; i++ {
 		for j := range yValues {
 			if input[i][yValues[j]] != ' ' {
-				data[j] = append(data[j], string(input[i][yValues[j]]))
+				data[j] = append([]string{string(input[i][yValues[j]])}, data[j]...)
 			}
 		}
 	}
@@ -84,26 +84,28 @@ func main() {
 
 			crates := ""
 			for j := 0; j < n; j++ {
-				crates = stacks[from][len(stacks[from]) - 1] + crates
-				stacks[to] = append(stacks[to], stacks[from][len(stacks[from])-1])
-				stacks[from] = stacks[from][:len(stacks[from])-1]
+				crates = data[from][len(data[from]) - 1] + crates
+				data[to] = append(data[to], data[from][len(data[from])-1])
+				data[from] = data[from][:len(data[from])-1]
 			}
 			
-			for j := 0; j < len(crates); j++ {
-				stacks2[to] = append(stacks2[to], string(crates[j]))
-				stacks2[from] = stacks2[from][:len(stacks2[from])-1]
-			}
+			// for j := 0; j < len(crates); j++ {
+			// 	stacks2[to] = append(stacks2[to], string(crates[j]))
+			// 	stacks2[from] = stacks2[from][:len(stacks2[from])-1]
+			// }
 		}
 	}
 
 	fmt.Print("Part 1 Answer: ")
-	for i := range stacks {
-		fmt.Print(stacks[i][len(stacks[i])-1])
+	for i := range data {
+		if len(data[i]) > 0 {
+			fmt.Print(data[i][len(data[i])-1])
+		}
 	}
-	fmt.Print("\nPart 2 Answer: ")
-	for i := range stacks2 {
-		fmt.Print(stacks2[i][len(stacks2[i])-1])
-	}
+	// fmt.Print("\nPart 2 Answer: ")
+	// for i := range stacks2 {
+	// 	fmt.Print(stacks2[i][len(stacks2[i])-1])
+	// }
 	fmt.Println()
 }
 
