@@ -9,44 +9,6 @@ import (
 )
 
 func main() {
-	// stacks := [][]string {
-	// 	{"H", "C", "R"},
-	// 	{"B", "J", "H", "L", "S", "F"},
-	// 	{"R", "M", "D", "H", "J", "T", "Q"},
-	// 	{"S", "G", "R", "H", "Z", "B", "J"},
-	// 	{"R", "P", "F", "Z", "T", "D", "C", "B"},
-	// 	{"T", "H", "C", "G"},
-	// 	{"S", "N", "V", "Z", "B", "P", "W", "L"},
-	// 	{"R", "J", "Q", "G", "C"},
-	// 	{"L", "D", "T", "R", "H", "P", "F", "S"},
-	// }
-
-	// stacks2 := [][]string {
-	// 	{"H", "C", "R"},
-	// 	{"B", "J", "H", "L", "S", "F"},
-	// 	{"R", "M", "D", "H", "J", "T", "Q"},
-	// 	{"S", "G", "R", "H", "Z", "B", "J"},
-	// 	{"R", "P", "F", "Z", "T", "D", "C", "B"},
-	// 	{"T", "H", "C", "G"},
-	// 	{"S", "N", "V", "Z", "B", "P", "W", "L"},
-	// 	{"R", "J", "Q", "G", "C"},
-	// 	{"L", "D", "T", "R", "H", "P", "F", "S"},
-	// }
-
-	// stacks := [][]string{
-	// 	{"Z", "N"},
-	// 	{"M", "C", "D"},
-	// 	{"P"},
-	// }
-
-	// stacks2 := [][]string{
-	// 	{"Z", "N"},
-	// 	{"M", "C", "D"},
-	// 	{"P"},
-	// }
-
-	// queue := []string{}
-
 	input, _ := readLines("input.txt")
 	var sectionMarker, stackCount = 0, 0
 	for i := range input {
@@ -71,6 +33,12 @@ func main() {
 			}
 		}
 	}
+	
+	data2 := make([][]string, len(data))
+	for i := range data {
+		data2[i] = make([]string, len(data[i]))
+		copy(data2[i], data[i])
+	}
 
 	for i := sectionMarker; i < len(input); i++ {
 		if input[i] != "" {
@@ -82,17 +50,19 @@ func main() {
 			var from int = parseInt(strings.Fields(line)[1]) - 1
 			var to int = parseInt(strings.Fields(line)[2]) - 1
 
-			crates := ""
+			s := ""
 			for j := 0; j < n; j++ {
-				crates = data[from][len(data[from]) - 1] + crates
 				data[to] = append(data[to], data[from][len(data[from])-1])
 				data[from] = data[from][:len(data[from])-1]
+
+				s += data2[from][len(data2[from])-1]
+				data2[from] = data2[from][:len(data2[from])-1]
 			}
 			
-			// for j := 0; j < len(crates); j++ {
-			// 	stacks2[to] = append(stacks2[to], string(crates[j]))
-			// 	stacks2[from] = stacks2[from][:len(stacks2[from])-1]
-			// }
+			for j := 0; j < n; j++ {
+				data2[to] = append(data2[to], string(s[len(s)-1]))
+				s = s[:len(s)-1]
+			}
 		}
 	}
 
@@ -102,12 +72,15 @@ func main() {
 			fmt.Print(data[i][len(data[i])-1])
 		}
 	}
-	// fmt.Print("\nPart 2 Answer: ")
-	// for i := range stacks2 {
-	// 	fmt.Print(stacks2[i][len(stacks2[i])-1])
-	// }
+	fmt.Print("\nPart 2 Answer: ")
+	for i := range data2 {
+		if len(data2[i]) > 0 {
+			fmt.Print(data2[i][len(data2[i])-1])
+		}
+	}
 	fmt.Println()
 }
+
 
 func charLocation(s string, c string) int {
 	for i := range s {
