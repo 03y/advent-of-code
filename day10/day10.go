@@ -10,10 +10,24 @@ import (
 
 func main() {
 	input, _ := readLines("input.txt")
+	var display [240]string
+	spritePos := 0
+	for i := 0; i < 240; i++ {
+		display[i] = "."
+	}
+
 	cycle, register := 1, 1
 	signalStrength := map[int]int{}
 
 	for i := 0; i < len(input); i++ {
+		if cycle % 4 == 0 {
+			spritePos += 3
+		}
+
+		if cycle >= spritePos && cycle <= spritePos+2 {
+			display[i] = "#"
+		}
+		
 		instruction := strings.Split(input[i], " ")
 
 		if instruction[0] == "addx" {
@@ -43,6 +57,14 @@ func main() {
 	}
 
 	fmt.Println("Part 1 Answer:", total)
+	fmt.Println("Part 2 Answer:")
+
+	for i := 0; i < 240; i++ {
+		fmt.Print(display[i])
+		if i % 40 == 39 {
+			fmt.Println()
+		}
+	}
 }
 
 func readLines(path string) ([]string, error) {
