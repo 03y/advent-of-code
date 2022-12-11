@@ -1,26 +1,76 @@
 # Advent of Code 2022
-- [x][x] Day 1
-- [x][x] Day 2
-- [x][x] Day 3
-- [x][x] Day 4
-- [x][x] Day 5
-- [x][x] Day 6
-- [x][x] Day 7
-- [x][x] Day 8
-- [x][ ] Day 9
-- [x][ ] Day 10
-- [ ][ ] Day 11
-- [ ][ ] Day 12
-- [ ][ ] Day 13
-- [ ][ ] Day 14
-- [ ][ ] Day 15
-- [ ][ ] Day 16
-- [ ][ ] Day 17
-- [ ][ ] Day 18
-- [ ][ ] Day 19
-- [ ][ ] Day 20
-- [ ][ ] Day 21
-- [ ][ ] Day 22
-- [ ][ ] Day 23
-- [ ][ ] Day 24
-- [ ][ ] Day 25
+- Day 1
+    - [x] Part 1
+    - [x] Part 2
+- Day 2
+    - [x] Part 1
+    - [x] Part 2
+- Day 3
+    - [x] Part 1
+    - [x] Part 2
+- Day 4
+    - [x] Part 1
+    - [x] Part 2
+- Day 5
+    - [x] Part 1
+    - [x] Part 2
+- Day 6
+    - [x] Part 1
+    - [x] Part 2
+- Day 7
+    - [x] Part 1
+    - [x] Part 2
+- Day 8
+    - [x] Part 1
+    - [x] Part 2
+- Day 9
+    - [x] Part 1
+    - [ ] Part 2
+- Day 10
+    - [x] Part 1
+    - [ ] Part 2
+- Day 11
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 12
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 13
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 14
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 15
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 16
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 17
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 18
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 19
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 20
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 21
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 22
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 23
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 24
+    - [ ] Part 1
+    - [ ] Part 2
+- Day 25
+    - [ ] Part 1
+    - [ ] Part 2
