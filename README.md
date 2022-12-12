@@ -34,7 +34,7 @@
     - [ ] Part 2
 - Day 12
     - [x] Part 1
-    - [ ] Part 2
+    - [x] Part 2
 - Day 13
     - [ ] Part 1
     - [ ] Part 2
