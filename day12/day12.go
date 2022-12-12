@@ -12,9 +12,8 @@ func main() {
 	input, _ := readLines("input.txt")
 
 	var grid [][]int
-	var S, G int
+	var val, S, G int
 	var startingPoints []int
-	val := 0
 	graph := dijkstra.NewGraph()
 
 	// parsing nodes
@@ -69,6 +68,16 @@ func main() {
 
 	cost, _ := graph.Shortest(S, G)
 	fmt.Println("Part 1 Answer:", cost.Distance)
+
+	min := 32767
+	for _, node := range startingPoints {
+		cost, _ := graph.Shortest(node, G)
+		t := int(cost.Distance)
+		if t< min && t != 0 {
+			min = t
+		}
+	}
+	fmt.Println("Part 2 Answer:", min)
 }
 
 func getHeight(s string) int {
