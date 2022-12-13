@@ -36,7 +36,7 @@
     - [x] Part 1
     - [x] Part 2
 - Day 13
-    - [ ] Part 1
+    - [x] Part 1
     - [ ] Part 2
 - Day 14
     - [ ] Part 1
