@@ -1,15 +1,15 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-	"sort"
+    "bufio"
+    "fmt"
+    "os"
+    "sort"
 )
 
 func main() {
     input, _ := readLines("input.txt")
-	sids := []int{}
+    sids := []int{}
 
     for i := range input {
         if input[i] != "" {
@@ -24,28 +24,28 @@ func main() {
                         rowBin[j] = 0
                     }
                 } else {
-					if input[i][j] == 'R' {
-						colBin [j-7] = 1
-					} else {
-						colBin [j-7] = 0
-					}
-				}
+                    if input[i][j] == 'R' {
+                        colBin [j-7] = 1
+                    } else {
+                        colBin [j-7] = 0
+                    }
+                }
             }
             row := binToDec(rowBin[:])
             col := binToDec(colBin[:])
-			sids = append(sids, row*8+col)
+            sids = append(sids, row*8+col)
         }
     }
 
-	sort.Ints(sids)
-	fmt.Println("Part 1:", sids[len(sids)-1])
+    sort.Ints(sids)
+    fmt.Println("Part 1:", sids[len(sids)-1])
 
-	for i := 1; i < len(sids); i++ {
-		if sids[i]-1 != sids[i-1] {
-			fmt.Println("Part 2:", sids[i]-1)
-			return
-		}
-	}
+    for i := 1; i < len(sids); i++ {
+        if sids[i]-1 != sids[i-1] {
+            fmt.Println("Part 2:", sids[i]-1)
+            return
+        }
+    }
 }
 
 func binToDec(bin []int) int {
