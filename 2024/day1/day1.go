@@ -12,8 +12,7 @@ import (
 func main() {
 	input, _ := readLines("input.txt")
 
-	var part1 int
-	var part2 int
+	part1, part2 := 0, 0
 	var left []int
 	var right []int
 
@@ -44,7 +43,7 @@ func occurrences(list []int, target int) int {
 	result := 0
 	for i := range list {
 		if list[i] == target {
-			result += 1
+			result++
 		}
 	}
 	return result
