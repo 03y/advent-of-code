@@ -1,78 +1,84 @@
-input = '2333133121414131402'
+import re
+import random
+
+seed = 0x0000
+magic = 0xFFFF
 
 class Block:
     def __init__(self, size, empty):
         self.size = size
         self.empty = empty
 
-size, empty = 1, False
-blocks = []
-
-for i in range(len(input)):
-    blocks.append(Block(int(input[i]), empty))
-    empty = not empty
-
-print(input)
-
-id = 0
-fs = ''
-for i in range(len(blocks)):
-    print(id, blocks[i].size)
-    if blocks[i].empty == True:
-        fs += '.' * blocks[i].size
-    else:
-        fs += str(id) * blocks[i].size
-        id += 1
-
-print(fs)
+def is_sorted(fs):
+    for i in range(len(fs)):
+        if fs[i] == chr(magic):
+            for j in range(i, len(fs)):
+                if fs[j] != chr(magic):
+                    return False
+    return True
 
 def get_last(fs):
     pos = len(fs)-1
     while pos > 0:
-        if fs[pos] != '.':
+        if fs[pos] != chr(magic):
             return pos
         pos -= 1
     return -1
 
 def get_free(fs):
     for i in range(len(fs)):
-        if fs[i] == '.':
+        if fs[i] == chr(magic):
             return i
     return -1
 
-import re
+# the example only had 0-9 so i made the dumb assumption that was all the numbers would go to (wrap or something after 9), but no they increase forever so lazy unicode fix lol
+def get_unicode_char():
+    global seed
+    n = seed
+    seed += 1
+    return chr(n)
 
-def is_sorted(fs):
-    return re.search('\d+\.+\d+', fs) == None
+print('prepare for O(n^2) solution lmao...')
 
-print(is_sorted(fs))
+with open('input.txt') as f:
+    input = f.readline().strip('\n')
 
-def replace(s, c, index):
-    return s[:index] + c + s[index + 1:]
+    size, empty = 1, False
+    blocks = []
 
-sorted = False
-while not sorted:
-    if is_sorted(fs):
-        sorted = True
-    else:
-        n = get_last(fs)
-        fs = replace(fs, fs[n], get_free(fs))
-        fs = replace(fs, fs[n], n)
-        fs = replace(fs, '.', n)
+    for i in range(len(input)):
+        blocks.append(Block(int(input[i]), empty))
+        empty = not empty
 
-print(is_sorted(fs))
-print(fs)
+    id = get_unicode_char()
+    used = [id]
+    fs = []
+    for i in range(len(blocks)):
+        if blocks[i].empty == True:
+            used += id
+            fs += chr(magic) * blocks[i].size
+        else:
+            fs += str(id) * blocks[i].size
+            id = get_unicode_char()
 
-checksum = 0
-n = 0
-curr = ''
-for i in range(len(fs)):
-    if i == 0:
-        curr = fs[i]
-    if fs[i] != curr and curr != '.':
-        print(curr, n)
-        checksum += int(curr) * n
-        curr = fs[i]
-        n += 1
+    def print_fs(fs):
+        for i in range(len(fs)):
+            print(fs[i], end='')
+        print()
 
-print(checksum)
+    sorted = False
+    while not sorted:
+        if is_sorted(fs):
+            sorted = True
+        else:
+            n = get_last(fs)
+            fs[get_free(fs)] = fs[n]
+            fs[n] = chr(magic)
+
+    checksum = 0
+    n = 0
+    for i in range(len(fs)):
+        if ord(fs[i]) != magic:
+            checksum += i * ord(fs[i])
+
+    print('Part 1:', checksum)
