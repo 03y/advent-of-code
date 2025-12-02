@@ -35,8 +35,7 @@ def valid_pattern(s: str) -> bool:
         matches = re.findall(substr, s)
 
         # if the number of matches we got is a factor of the length of the substring
-        if len(s) == i * len(matches):
-            return True
+        return len(s) == i * len(matches)
 
     return False
 
@@ -63,3 +62,4 @@ for id_range in line.split(','):
 
 print('Part 1:', part1)
 print('Part 2:', part2)
+

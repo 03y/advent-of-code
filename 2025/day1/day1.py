@@ -61,3 +61,4 @@ def part2(commands):
 
 print('Part 1:', part1(commands))
 print('Part 2:', part2(commands))
+
